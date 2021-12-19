@@ -14,7 +14,7 @@ class Estado(models.Model):
 class Rol(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
     nombre_rol = models.CharField(max_length=50)
-    descripcion_rol = models.TextField()
+    descripcion_rol = models.TextField(null=True, blank=True)
     
     def __str__(self) -> str:
         return self.nombre_rol
@@ -24,13 +24,15 @@ class User(AbstractUser):
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
+    fecha_nac = models.DateField(null=True, blank=True)
+    descripcion = models.TextField(null=True, blank=True)
     
     def __str__(self) -> str:
         return self.username
     
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200)
-    cant_publ = models.IntegerField()
+    cant_publ = models.IntegerField(default=0)
     
     def __str__(self) -> str:
         return self.nombre
@@ -44,7 +46,7 @@ class Publicacion (models.Model):
     contenido = models.TextField()
     fecha_hora_publ = models.DateTimeField(auto_now_add = True)
     fecha_edicion = models.DateTimeField(auto_now = True)
-    cantidad_coment = models.IntegerField()
+    cantidad_coment = models.IntegerField(default=0)
     imagen = models.ImageField(upload_to='images')
     
     def publicar(self):
