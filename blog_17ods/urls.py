@@ -16,10 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from blog import views
+from django.conf import settings
+from django.conf.urls.static import static 
+
+from blog.views import (
+    PublicacionListView,
+    PublicacionDetailView,
+    PublicacionCreateView,
+    PublicacionUpdateView,
+    PublicacionDeleteView)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name="index" ),
-    path('accounts/', include('allauth.urls')),
-]
+    #path('accounts/', include('allauth.urls')), #para inicio de sesión con redes sociales
+    path('accounts/', include('django.contrib.auth.urls')),
+    #PUBLICACIONES
+    path('', PublicacionListView.as_view(), name="list" ),
+    path('<slug:pk>/detail', PublicacionDetailView.as_view(), name="detail" ),
+    path('<slug:pk>/update/', PublicacionUpdateView.as_view(), name="update" ),
+    path('<slug:pk>/delete/', PublicacionDeleteView.as_view(), name="delete" ),
+    path('create/', PublicacionCreateView.as_view(), name="create" ),
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #para cargar imagenes subidas por el usuario

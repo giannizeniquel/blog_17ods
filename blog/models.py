@@ -25,6 +25,7 @@ class User(AbstractUser):
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     fecha_nac = models.DateField(null=True, blank=True)
     biografia = models.TextField(null=True, blank=True)
+    imagen = models.ImageField(upload_to='images', default='default_user_profile.png' )
     
     def __str__(self) -> str:
         return self.username
@@ -41,7 +42,7 @@ class Categoria(models.Model):
 class Publicacion (models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
-    estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
+    estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     titulo = models.CharField(max_length=200)
     sub_titulo = models.CharField(max_length=400)
     contenido = models.TextField()
@@ -49,6 +50,7 @@ class Publicacion (models.Model):
     fecha_edicion = models.DateTimeField(auto_now = True)
     cantidad_coment = models.IntegerField(default=0)
     imagen = models.ImageField(upload_to='images')
+    es_publico = models.BooleanField(default=True)
     
     def publicar(self):
         self.fecha_hora_publ = timezone.now()
