@@ -9,10 +9,11 @@ class Estado(models.Model):
     activo = models.BooleanField(default=True)
     
     def __str__(self) -> str:
-        return self.activo
+        estado = str(self.activo)
+        return estado
     
 class Rol(models.Model):
-    estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
+    estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     nombre_rol = models.CharField(max_length=50)
     descripcion_rol = models.TextField(null=True, blank=True)
     
@@ -22,16 +23,16 @@ class Rol(models.Model):
 class User(AbstractUser):
     rol = models.ForeignKey(Rol, on_delete=models.PROTECT, null=True)
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
     fecha_nac = models.DateField(null=True, blank=True)
-    descripcion = models.TextField(null=True, blank=True)
+    biografia = models.TextField(null=True, blank=True)
     
     def __str__(self) -> str:
         return self.username
     
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200)
+    descripcion_corta = models.TextField(max_length=300, null=True, blank=True)
+    descripcion = models.TextField(null=True, blank=True)
     cant_publ = models.IntegerField(default=0)
     
     def __str__(self) -> str:
