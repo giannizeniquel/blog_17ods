@@ -26,9 +26,8 @@
             <div id="original-load"></div>
         </div>
     </div>
-
     <!-- Subscribe Modal -->
-    <div class="subscribe-newsletter-area">
+{% comment %}     <div class="subscribe-newsletter-area">
         <div class="modal fade" id="subsModal" tabindex="-1" role="dialog" aria-labelledby="subsModal"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -48,7 +47,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -111,7 +110,7 @@
                         {% if user.is_authenticated %}
                             <div class="row classy-navbar justify-content-between">
                                 <div class="col-6">
-                                    <a href="#" class="btn subscribe-btn" data-toggle="modal"
+                                    <a href="{% url 'logout' %}" class="btn subscribe-btn" data-toggle="modal"
                                         data-target="#subsModal">Cerrar sesión</a>
                                 </div>
                                 <div class="col-6">
@@ -122,8 +121,7 @@
                         {% else %}
                             <div class="row classy-navbar justify-content-between">
                                 <div class="col-6">
-                                    <a href="#" class="btn subscribe-btn" data-toggle="modal"
-                                        data-target="#subsModal">Iniciar sesión</a>
+                                    <a href="{% url 'login' %}" class="btn subscribe-btn" >Iniciar sesión</a>
                                 </div>
                                 <div class="col-6">
                                     <a href="#" class="btn subscribe-btn" data-toggle="modal"
@@ -257,7 +255,7 @@
     <div class="hero-area">
         <!-- Hero Slides Area -->
         <div class="hero-slides owl-carousel">
-            
+
             <!-- Single Slide -->
             <div class="single-hero-slide bg-img" style="background-image: url({% static 'img/bg-img/b2.jpg' %})">
                 <div class="container h-100">
