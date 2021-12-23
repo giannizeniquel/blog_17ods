@@ -29,7 +29,6 @@ from blog.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('accounts/', include('allauth.urls')), #para inicio de sesión con redes sociales
     path('accounts/', include('django.contrib.auth.urls')),
     #PUBLICACIONES
     path('', PublicacionListView.as_view(), name="list" ),
