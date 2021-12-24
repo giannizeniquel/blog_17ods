@@ -54,6 +54,7 @@ class Publicacion (models.Model):
     cantidad_coment = models.IntegerField(default=0)
     imagen = models.ImageField(upload_to='images')
     es_publico = models.BooleanField(default=True)
+    slug = models.SlugField()
     
     def publicar(self):
         self.fecha_hora_publ = timezone.now()
@@ -61,6 +62,10 @@ class Publicacion (models.Model):
         
     def __str__(self) -> str:
         return self.titulo
+
+    @property
+    def get_comment_count(self):
+        return self.comentario_set.all().count()
 
     class Meta:
         verbose_name = ("Publicacion")
@@ -75,7 +80,8 @@ class Comentario(models.Model):
     fecha_hora_coment = models.DateTimeField(auto_now_add = True)
     
     def __str__(self) -> str:
-        return self.user.nombre_usuario
+        return self.usuario.username
+    
     
     class Meta:
         verbose_name = ("Comentario")

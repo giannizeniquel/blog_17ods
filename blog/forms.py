@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import *
 #para usar mi User custom
 from django.contrib.auth import get_user_model
 User = get_user_model() 
@@ -14,3 +15,16 @@ class UserRegisterForm(UserCreationForm):
         model= User
         fields = [ 'first_name', 'last_name', 'biografia', 'imagen', 'username', 'email', 'password1', 'password1' ]
         help_texts = { k:"" for k in fields }
+        
+class PublicacionForm(forms.ModelForm):
+    class Meta:
+        model = Publicacion
+        fields = (
+            'categoria',
+            'titulo',
+            'sub_titulo',
+            'contenido',
+            'imagen',
+            'es_publico'    
+        )
+        

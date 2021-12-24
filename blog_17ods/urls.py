@@ -35,9 +35,9 @@ urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
     #PUBLICACIONES
     path('', PublicacionListView.as_view(), name="list" ),
-    path('<slug:pk>/detail', PublicacionDetailView.as_view(), name="detail" ),
+    path('create/', PublicacionCreateView.as_view(), name="create" ),
+    path('<slug:pk>/detail/', PublicacionDetailView.as_view(), name="detail" ),
     path('<slug:pk>/update/', PublicacionUpdateView.as_view(), name="update" ),
     path('<slug:pk>/delete/', PublicacionDeleteView.as_view(), name="delete" ),
-    path('create/', PublicacionCreateView.as_view(), name="create" ),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #para cargar imagenes subidas por el usuario
