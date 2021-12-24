@@ -104,31 +104,40 @@
         <!-- Nav Area -->
         <div class="original-nav-area" id="stickyNav">
             <div class="classy-nav-container breakpoint-off">
-                <div class="row">
-                    <div class="col-2">
-                        <!-- actions user btns -->
-                        {% if user.is_authenticated %}
-                            <div class="row classy-navbar justify-content-between">
-                                <div class="col-6">
-                                    <a href="{% url 'logout' %}" class="btn subscribe-btn" data-toggle="modal"
-                                        data-target="#subsModal">Cerrar sesión</a>
+                <!-- actions user btns -->
+                {% if user.is_authenticated %}
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="row classy-navbar justify-content-between">      
+                                <div class="col-12">
+                                    <div class="classynav">
+                                        <img src="{{ user.imagen.url }}" alt="Foto_perfil" width="50" height="50"/>
+                                        &nbsp;
+                                        <ul class="dropdown">
+                                            <li>
+                                                <a href="#">Hola, {{ user.username }}</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#user_profile">Perfil</a></li>
+                                                    <li><a href="#mis_posts">Mis Posts</a></li>
+                                                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <a href="#" class="btn subscribe-btn" data-toggle="modal"
-                                        data-target="#subsModal">Mis Posts</a>
-                                </div>
-                            </div>
-                        {% else %}
+                            </div>  
+                {% else %}
+                    <div class="row">
+                        <div class="col-2">
                             <div class="row classy-navbar justify-content-between">
                                 <div class="col-6">
                                     <a href="{% url 'login' %}" class="btn subscribe-btn" >Iniciar sesión</a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" class="btn subscribe-btn" data-toggle="modal"
-                                        data-target="#subsModal">Registrarse</a>
+                                    <a href="{% url 'signup' %}" class="btn subscribe-btn">Registrarse</a>
                                 </div>
                             </div>
-                        {% endif %}
+                {% endif %}
                     </div>
                     <div class="container">
                         <!-- Classy Menu -->

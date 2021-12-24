@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from blog import views
 from django.conf import settings
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
+from blog.views import SignUpView 
 
 from blog.views import (
+    SignUpView,
     PublicacionListView,
     PublicacionDetailView,
     PublicacionCreateView,
@@ -30,6 +32,7 @@ from blog.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('signup/', SignUpView.as_view(), name='signup'),
     #PUBLICACIONES
     path('', PublicacionListView.as_view(), name="list" ),
     path('<slug:pk>/detail', PublicacionDetailView.as_view(), name="detail" ),

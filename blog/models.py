@@ -21,11 +21,14 @@ class Rol(models.Model):
         return self.nombre_rol
     
 class User(AbstractUser):
-    rol = models.ForeignKey(Rol, on_delete=models.PROTECT, null=True)
+    rol = models.ForeignKey(Rol, on_delete=models.PROTECT, null=True, default = 1)
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     fecha_nac = models.DateField(null=True, blank=True)
     biografia = models.TextField(null=True, blank=True)
-    imagen = models.ImageField(upload_to='images', default='default_user_profile.png' )
+    imagen = models.ImageField(upload_to='images', default='images/default_user_profile.png', null=True, blank=True )
+    
+    class Meta:
+        db_table = 'auth_user'
     
     def __str__(self) -> str:
         return self.username
