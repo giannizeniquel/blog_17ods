@@ -66,6 +66,10 @@ class Publicacion (models.Model):
     @property
     def get_comment_count(self):
         return self.comentario_set.all().count()
+    
+    @property
+    def comentarios(self):
+        return self.comentario_set.all()
 
     class Meta:
         verbose_name = ("Publicacion")
@@ -73,7 +77,7 @@ class Publicacion (models.Model):
   
 class Comentario(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
+    estado = models.ForeignKey(Estado, on_delete=models.PROTECT, default=1)
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
     contenido = models.TextField()

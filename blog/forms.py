@@ -25,6 +25,17 @@ class PublicacionForm(forms.ModelForm):
             'sub_titulo',
             'contenido',
             'imagen',
-            'es_publico'    
+            'es_publico',
+        )
+
+class ComentarioForm(forms.ModelForm):
+    contenido = forms.CharField(required = True, widget=forms.Textarea(attrs={
+        'rows': 4
+    }))
+    class Meta:
+        model = Comentario
+        fields = (
+            'titulo',
+            'contenido',
         )
         

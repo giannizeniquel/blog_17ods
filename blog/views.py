@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import *
-from .forms import UserRegisterForm, PublicacionForm
+from .forms import UserRegisterForm, PublicacionForm, ComentarioForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -19,10 +19,34 @@ class PublicacionListView(ListView):
 class PublicacionDetailView(DetailView):
     model = Publicacion
     
+    def post(self, *args, **kwargs):
+        form = ComentarioForm(self.request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            comentario = form.instance
+            comentario.usuario = self.request.user
+            comentario.publicacion = post
+            comentario.save()
+            return redirect('detail', post.id)
+        else:
+            return redirect('detail', self.get_object().id)
+            
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'form': ComentarioForm
+        })
+        return context
 class PublicacionCreateView(CreateView):
     form_class = PublicacionForm
     model = Publicacion
     
+    def form_valid(self, form):
+        post = form.instance
+        post.usuario = self.request.user 
+        post.save()
+        return redirect('detail', post.id)
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
