@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="conteiner">
+        <h1 class="d-flex justify-content-center">
+            Seguro deseas eliminar este post?
+        </h1>
+        <div class="row">
+            <div class="col-12 col-md-4 offset-md-4">
+                <br><br>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="d-flex justify-content-center">{{ object.titulo }}</h2>
+                        <h5>{{ object.sub_titulo }}</h5>
+                        <hr>
+                        <br>
+                        <p style="text-align: justify;">{{ object.contenido }}</p>
+                        <br>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Eliminar</button>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'list' %}"><button class="btn btn-primary">Cancelar</button></a>
+            </div>
+            <br><br>
+        <form>
+    <div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-9" style="text-align: end; margin-top: 2%; margin-bottom: 5%; text-decoration: underline;">
+            <h1>Publicaciones mas recientes</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for object in object_list %}
+            {% if object.es_publico %}
+                <div class="col-12 col-lg-9">
+                    <!-- Single Blog Area  -->
+                    <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1000ms">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <div class="single-blog-thumbnail">
+                                    <img src="{{ object.imagen.url }}" alt="" width="398" height="279">
+                                    <div class="post-date">
+                                        <a href="#">{{ object.fecha_hora_publ|date:'d' }} <span>{{ object.fecha_hora_publ|date:'b' }}</span><span>{{ object.fecha_hora_publ|date:'Y' }}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <!-- Blog Content -->
+                                <div class="single-blog-content">
+                                    <a href="#categoria" class="post-tag">{{ object.categoria }}</a>
+                                    <h4><a href="{% url 'detail' object.pk %}" class="post-headline">{{ object.titulo }}</a></h4>
+                                    <h6>{{ object.sub_titulo }}</h6>
+                                    <p>{{ object.contenido|truncatechars:197 }} <a href="#single_post" class="post-headline">ver mas</a></p>
+                                    <div class="post-meta">
+                                        <p>Autor: <a href="#usuario">{{ object.usuario.first_name }} {{ object.usuario.last_name }}</a></p>
+                                    </div>
+                                    <div class="post-meta">
+                                        <p>{{ object.get_comment_count }} comentarios</p>
+                                    </div>
+                                    <div class="post-meta">
+                                        <p>Publicado hace: {{ object.fecha_hora_publ|timesince }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
