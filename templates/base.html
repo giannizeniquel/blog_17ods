@@ -142,13 +142,13 @@
                                             <li id="registro"><a href="{% url 'signup' %}" class="btn subscribe-btn">Registrarse</a></li>
                                         {% endif %}
                                         <li><a href="{% url 'list' %}">Inicio</a></li>
-                                        <li><a href="#">Categorias</a></li>
+                                        <li><a href="{% url 'categoria_list' %}">Categorias</a></li>
                                         <li>
                                             <a href="#">Páginas</a>
                                             <ul class="dropdown">
                                                 <li><a href="{% url 'list' %}">Inicio</a></li>
                                                 <li><a href="{% static 'about-us.html' %}">Info</a></li>
-                                                <li><a href="{% static 'single-post.html' %}">Categorías</a></li>
+                                                <li><a href="{% url 'categoria_list' %}">Categorías</a></li>
                                                 <li><a href="{% static 'contact.html' %}">Contacto</a></li>
                                             </ul>
                                         </li>

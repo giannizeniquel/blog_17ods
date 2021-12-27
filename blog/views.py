@@ -58,6 +58,7 @@ class PublicacionCreateView(CreateView):
 class PublicacionUpdateView(UpdateView):
     form_class = PublicacionForm
     model = Publicacion
+    success_url = reverse_lazy('list')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,3 +71,6 @@ class PublicacionUpdateView(UpdateView):
 class PublicacionDeleteView(DeleteView):
     model = Publicacion
     success_url = reverse_lazy('list')
+    
+class CategoriaListView(ListView):
+    model = Categoria

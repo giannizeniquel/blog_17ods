@@ -26,7 +26,9 @@ from blog.views import (
     PublicacionDetailView,
     PublicacionCreateView,
     PublicacionUpdateView,
-    PublicacionDeleteView)
+    PublicacionDeleteView,
+    CategoriaListView,
+    )
 
 
 urlpatterns = [
@@ -35,6 +37,7 @@ urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
     #PUBLICACIONES
     path('', PublicacionListView.as_view(), name="list" ),
+    path('categorias/', CategoriaListView.as_view(), name="categoria_list" ),
     path('create/', PublicacionCreateView.as_view(), name="create" ),
     path('<slug:pk>/detail/', PublicacionDetailView.as_view(), name="detail" ),
     path('<slug:pk>/update/', PublicacionUpdateView.as_view(), name="update" ),

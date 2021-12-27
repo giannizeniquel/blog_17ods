@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-lg-8" style="text-align: end; margin-top: 2%; margin-bottom: 5%; text-decoration: underline;">
+            <h1>Objetivos de Desarrollo Sostenible</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for object in object_list %}
+            {% if object %}
+            <div class="col-sm-6 col-md-3 wow fadeIn pb-20 objetivo" style="text-align: center;">
+                <a href="../objetivos/objetivo1.htm">
+                    <img src="../../static/img/objetivos/objetivo_{{ forloop.counter }}.png" alt="Objetivo{{ forloop.counter }}-logo" width="263" height="263">
+                    <br>
+                    <br>
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}
